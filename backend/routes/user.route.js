@@ -5,8 +5,8 @@ const {
   signout,
   getBulkUsers,
   getRecentUsers,
-} = require("../controllers/user.controller");
-const { verifyToken } = require("../middlewares/auth.middleware");
+} = require("../controllers/user.controller.js");
+const { verifyToken } = require("../middlewares/auth.middleware.js");
 
 const router = Router();
 

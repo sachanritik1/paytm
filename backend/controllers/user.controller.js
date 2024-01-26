@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 const { z } = require("zod");
-const { User } = require("../models/user.model");
-const { asyncHandler } = require("../utils/asyncHandler");
-const { ApiError } = require("../utils/ApiError");
-const { ApiResponse } = require("../utils/ApiResponse");
-const { Account } = require("../models/account.model");
+const { User } = require("../models/user.model.js");
+const { asyncHandler } = require("../utils/asyncHandler.js");
+const { ApiError } = require("../utils/ApiError.js");
+const { ApiResponse } = require("../utils/ApiResponse.js");
+const { Account } = require("../models/account.model.js");
 require("dotenv").config();
 
 const JWT_SECRET = process.env.JWT_SECRET;

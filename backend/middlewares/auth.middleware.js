@@ -1,6 +1,6 @@
-const { ApiError } = require("../utils/ApiError");
-const { asyncHandler } = require("../utils/asyncHandler");
-const { User } = require("../models/user.model");
+const { ApiError } = require("../utils/ApiError.js");
+const { asyncHandler } = require("../utils/asyncHandler.js");
+const { User } = require("../models/user.model.js");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 

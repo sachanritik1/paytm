@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-const connectToDb = require("./db");
-const mainRouter = require("./routes");
+const connectToDb = require("./db.js");
+const mainRouter = require("./routes/index.js");
 const cookieParser = require("cookie-parser");
 const port = process.env.PORT || 3001;
 

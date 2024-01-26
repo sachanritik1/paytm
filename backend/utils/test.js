@@ -1,5 +1,5 @@
-const { Account } = require("../models/account.model");
-const { User } = require("../models/user.model");
+const { Account } = require("../models/account.model.js");
+const { User } = require("../models/user.model.js");
 const mongoose = require("mongoose");
 
 const updateField = async () => {

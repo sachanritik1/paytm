@@ -1,10 +1,10 @@
-const { asyncHandler } = require("../utils/asyncHandler");
-const { Account } = require("../models/account.model");
-const { ApiResponse } = require("../utils/ApiResponse");
+const { asyncHandler } = require("../utils/asyncHandler.js");
+const { Account } = require("../models/account.model.js");
+const { ApiResponse } = require("../utils/ApiResponse.js");
 const { model, default: mongoose } = require("mongoose");
 const { z } = require("zod");
-const { ApiError } = require("../utils/ApiError");
-const { Transaction } = require("../models/transaction.model");
+const { ApiError } = require("../utils/ApiError.js");
+const { Transaction } = require("../models/transaction.model.js");
 
 const getBalance = asyncHandler(async (req, res, next) => {
   const account = await Account.findOne({ userId: req.userId });

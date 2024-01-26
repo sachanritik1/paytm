@@ -1,9 +1,9 @@
 const { Router } = require("express");
-const { verifyToken } = require("../middlewares/auth.middleware");
+const { verifyToken } = require("../middlewares/auth.middleware.js");
 const {
   getBalance,
   transferMoney,
-} = require("../controllers/account.controller");
+} = require("../controllers/account.controller.js");
 
 const router = Router();
 
