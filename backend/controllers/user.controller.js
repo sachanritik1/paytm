@@ -1,9 +1,9 @@
+const jwt = require("jsonwebtoken");
 const { z } = require("zod");
 const { User } = require("../models/user.model");
 const { asyncHandler } = require("../utils/asyncHandler");
 const { ApiError } = require("../utils/ApiError");
 const { ApiResponse } = require("../utils/ApiResponse");
-const jwt = require("jsonwebtoken");
 const { Account } = require("../models/account.model");
 require("dotenv").config();
 
