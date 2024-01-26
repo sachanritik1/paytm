@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard";
 import Body from "./components/Body";
 import SendMoney from "./components/SendMoney";
 import Signin from "./components/signin";
+import PageNotFound from "./components/PageNotFound";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "signin",
     element: <Signin />,
+  },
+  {
+    path: "*",
+    element: <PageNotFound />,
   },
 ]);
 
