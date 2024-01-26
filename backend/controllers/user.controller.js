@@ -3,9 +3,11 @@ const { User } = require("../models/user.model");
 const { asyncHandler } = require("../utils/asyncHandler");
 const { ApiError } = require("../utils/ApiError");
 const { ApiResponse } = require("../utils/ApiResponse");
-const { JWT_SECRET } = require("../constants");
 const jwt = require("jsonwebtoken");
 const { Account } = require("../models/account.model");
+require("dotenv").config();
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const registerSchema = z.object({
   username: z.string().min(3).max(50),
@@ -66,7 +68,6 @@ const signinSchema = z.object({
 });
 
 const signin = asyncHandler(async (req, res) => {
-  console.log(req.body);
   const body = signinSchema.safeParse(req.body);
   if (!body.success) {
     return res.status(400).json(new ApiError(400, "invalid args", body.error));

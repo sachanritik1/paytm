@@ -1,8 +1,10 @@
 const { ApiError } = require("../utils/ApiError");
-const { JWT_SECRET } = require("../constants");
 const { asyncHandler } = require("../utils/asyncHandler");
 const { User } = require("../models/user.model");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const verifyToken = asyncHandler(async (req, res, next) => {
   if (!req.headers["authorization"] && !req.cookies.token) {
