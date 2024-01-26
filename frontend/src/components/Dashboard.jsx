@@ -92,7 +92,7 @@ const Dashboard = memo(() => {
             role="list"
             className="divide-y divide-gray-200 dark:divide-gray-700"
           >
-            {users.length > 1 ? (
+            {users.length > 0 ? (
               users.map((user) => <UserCard key={user._id} user={user} />)
             ) : (
               <li className="p-4 text-gray-500 dark:text-gray-400">
