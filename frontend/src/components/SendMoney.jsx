@@ -2,6 +2,7 @@ import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { balanceAtom } from "../store/atoms/balance";
 import { useRecoilState } from "recoil";
+import { API_URL } from "../constants";
 
 const SendMoney = () => {
   const [searchParams] = useSearchParams();
@@ -13,7 +14,7 @@ const SendMoney = () => {
 
   const sendMoney = async () => {
     try {
-      const res = await fetch("http://localhost/api/v1/accounts/transfer", {
+      const res = await fetch(API_URL + "/accounts/transfer", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

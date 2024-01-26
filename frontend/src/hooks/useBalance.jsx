@@ -1,12 +1,13 @@
 import { useSetRecoilState } from "recoil";
 import { balanceAtom } from "../store/atoms/balance";
 import { useEffect } from "react";
+import { API_URL } from "../constants";
 
 export function useBalance() {
   const setBalance = useSetRecoilState(balanceAtom);
   async function fetchBalance() {
     try {
-      const res = await fetch("http://localhost/api/v1/accounts/balance", {
+      const res = await fetch(API_URL + "/accounts/balance", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

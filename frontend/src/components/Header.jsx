@@ -4,6 +4,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { userAtom } from "../store/atoms/user";
 import { balanceAtom } from "../store/atoms/balance";
 import { useBalance } from "../hooks/useBalance";
+import { API_URL } from "../constants";
 
 const Header = memo(() => {
   const [user, setUser] = useRecoilState(userAtom);
@@ -27,7 +28,7 @@ const Header = memo(() => {
 
   async function logout() {
     try {
-      await fetch("http://localhost/api/v1/users/signout", {
+      await fetch(API_URL + "/users/signout", {
         method: "get",
         headers: {
           "Content-Type": "application/json",

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, memo } from "react";
 import UserCard from "./UserCard";
+import { API_URL } from "../constants";
 
 const Dashboard = memo(() => {
   const filter = useRef(null);
@@ -10,7 +11,7 @@ const Dashboard = memo(() => {
 
   async function fetchBulkUsers() {
     try {
-      const res = await fetch("http://localhost/api/v1/users/recent", {
+      const res = await fetch(API_URL + "/users/recent", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -30,7 +31,7 @@ const Dashboard = memo(() => {
     const search = filter.current.value;
     try {
       const res = await fetch(
-        `http://localhost/api/v1/users/bulk?filter=${filter.current.value}`,
+        `${API_URL}/users/bulk?filter=${filter.current.value}`,
         {
           method: "GET",
           headers: {

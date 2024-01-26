@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { userAtom } from "../store/atoms/user";
+import { API_URL } from "../constants";
 
 const Signup = () => {
   const firstName = useRef("");
@@ -48,7 +49,7 @@ const Signup = () => {
       password: password?.current?.value,
     };
     try {
-      const res = await fetch("/api/v1/users/signup", {
+      const res = await fetch(API_URL + "/users/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
