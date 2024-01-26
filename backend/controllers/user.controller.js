@@ -55,7 +55,9 @@ const signup = asyncHandler(async (req, res) => {
     sameSite: "none",
     secure: true,
   });
-  res.send(new ApiResponse(200, "User registered successfully", { token }));
+  res.send(
+    new ApiResponse(200, "User registered successfully", { token, user })
+  );
 });
 
 const signinSchema = z.object({
@@ -97,19 +99,32 @@ const signout = asyncHandler(async (req, res) => {
 const getBulkUsers = asyncHandler(async (req, res) => {
   const { filter } = req.query;
   console.log(filter);
+  //find all user matching with filter except current user
   const users = await User.find({
-    $or: [
-      { username: { $regex: filter, $options: "i" } },
-      { email: { $regex: filter, $options: "i" } },
-      { firstName: { $regex: filter, $options: "i" } },
-      { lastName: { $regex: filter, $options: "i" } },
+    $and: [
+      { _id: { $ne: req.userId } },
+      {
+        $or: [
+          { username: { $regex: filter, $options: "i" } },
+          { firstName: { $regex: filter, $options: "i" } },
+          { lastName: { $regex: filter, $options: "i" } },
+        ],
+      },
     ],
-  }).select("-password -username -email");
+  })
+    .select("-password")
+    .limit(5);
+
   res.send(new ApiResponse(200, "Success", { users }));
 });
 
 const getRecentUsers = asyncHandler(async (req, res) => {
-  const users = await User.find({}).select("-password ").limit(5);
+  //find all user except current user
+
+  const users = await User.find({ _id: { $ne: req.userId } })
+    .select("-password")
+    .sort({ createdAt: -1 })
+    .limit(5);
   if (!users) {
     return res.status(500).json(new ApiError(500, "Something went wrong"));
   }

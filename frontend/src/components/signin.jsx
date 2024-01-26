@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { atom, useSetRecoilState } from "recoil";
 import { userAtom } from "../store/atoms/user";
 
@@ -8,6 +8,8 @@ const Signin = () => {
   const password = useRef("");
   const navigate = useNavigate();
   const setUser = useSetRecoilState(userAtom);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +29,9 @@ const Signin = () => {
       if (json.success) {
         setUser(json.data.user);
         navigate("/dashboard");
+      } else {
+        setError(true);
+        setErrorMessage(json.message);
       }
     } catch (error) {
       console.log(error);
@@ -34,11 +39,11 @@ const Signin = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 -mx-20">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Welcome Back!
+            Welcome to <span className="text-indigo-600">SnapPay!</span>
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -69,7 +74,9 @@ const Signin = () => {
               />
             </div>
           </div>
-
+          {error && (
+            <div className="text-red-500 text-sm font-bold">{errorMessage}</div>
+          )}
           <div>
             <button
               type="submit"
@@ -77,6 +84,14 @@ const Signin = () => {
             >
               Sign In
             </button>
+          </div>
+          <div>
+            <p className="flex">
+              Don't have an account?
+              <Link to="/signup" className="hover:text-blue-400 mx-2">
+                Sign Up
+              </Link>
+            </p>
           </div>
         </form>
       </div>

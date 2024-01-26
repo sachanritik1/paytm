@@ -1,4 +1,7 @@
 import React, { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { userAtom } from "../store/atoms/user";
 
 const Signup = () => {
   const firstName = useRef("");
@@ -10,6 +13,9 @@ const Signup = () => {
 
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
+  const setUser = useSetRecoilState(userAtom);
 
   const verifyPassword = (password, confirmPassword) => {
     if (password !== confirmPassword) {
@@ -42,13 +48,21 @@ const Signup = () => {
       password: password?.current?.value,
     };
     try {
-      await fetch("/api/v1/users/signup", {
+      const res = await fetch("/api/v1/users/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
       });
+      const json = await res.json();
+      if (json.success) {
+        setUser(json.data.user);
+        navigate("/dashboard");
+      } else {
+        setError(true);
+        setErrorMessage(json.message);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -59,7 +73,7 @@ const Signup = () => {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign up for an account
+            Create a <span className="text-indigo-600">SnapPay</span> Account!
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -151,6 +165,14 @@ const Signup = () => {
             >
               Sign Up
             </button>
+          </div>
+          <div>
+            <p className="flex">
+              Already have an account?
+              <Link to="/signin" className="hover:text-blue-400 mx-2">
+                Sign In
+              </Link>
+            </p>
           </div>
         </form>
       </div>

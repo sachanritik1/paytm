@@ -58,7 +58,7 @@ const transferMoney = asyncHandler(async (req, res, next) => {
   }
   const { to, amount } = body.data;
   await transfer(req.userId, to, amount);
-  return res.status(200).json(new ApiResponse(200, "Success"));
+  return res.status(200).json(new ApiResponse(200, "Success", { amount }));
 });
 
 module.exports = {

@@ -2,34 +2,30 @@ import React, { memo, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userAtom } from "../store/atoms/user";
+import { balanceAtom } from "../store/atoms/balance";
+import { useBalance } from "../hooks/useBalance";
 
 const Header = memo(() => {
   const [user, setUser] = useRecoilState(userAtom);
-  const [balance, setBalance] = useState(0);
+  const balance = useRecoilValue(balanceAtom);
   const navigate = useNavigate();
 
-  async function fetchBalance() {
-    try {
-      const res = await fetch("http://localhost/api/v1/accounts/balance", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const json = await res.json();
-      setBalance(json.data.balance);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   useEffect(() => {
-    if (!user) {
-      navigate("/signin");
-    } else {
-      fetchBalance();
-    }
-  }, [user]);
+    const handleBeforeUnload = (event) => {
+      const message =
+        "You have unsaved changes. Are you sure you want to leave?";
+      event.returnValue = message;
+      return message;
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  useBalance();
 
   async function logout() {
     try {
@@ -50,7 +46,7 @@ const Header = memo(() => {
     <header className="bg-blue-500 text-white p-4">
       <div className="container mx-auto flex items-center justify-between">
         <div className="text-2xl font-bold">
-          <Link to="/dashboard">Paytm</Link>
+          <Link to="/dashboard">SnapPay</Link>
         </div>
         {user && (
           <div className="flex items-center space-x-4">

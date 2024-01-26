@@ -1,13 +1,18 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { userAtom } from "../store/atoms/user";
 import Header from "./Header";
 
 const Body = () => {
-  return (
-    <div>
+  const user = useRecoilValue(userAtom);
+  return user ? (
+    <>
       <Header />
       <Outlet />
-    </div>
+    </>
+  ) : (
+    <Navigate to="/signin" />
   );
 };
 

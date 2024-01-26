@@ -16,18 +16,18 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "signup",
-        element: <Signup />,
-      },
-      {
-        path: "signin",
-        element: <Signin />,
-      },
-      {
         path: "sendMoney",
         element: <SendMoney />,
       },
     ],
+  },
+  {
+    path: "signup",
+    element: <Signup />,
+  },
+  {
+    path: "signin",
+    element: <Signin />,
   },
 ]);
 
