@@ -17,9 +17,7 @@ const Header = memo(() => {
       event.returnValue = message;
       return message;
     };
-
     window.addEventListener("beforeunload", handleBeforeUnload);
-
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
