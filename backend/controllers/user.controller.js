@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { z } = require("zod");
 const { User } = require("../models/user.model.js");
-const { asyncHandler } = require("../utils/asyncHandler.js");
+const { asyncHandler } = require("../utils/AsyncHandler.js");
 const { ApiError } = require("../utils/ApiError.js");
 const { ApiResponse } = require("../utils/ApiResponse.js");
 const { Account } = require("../models/account.model.js");

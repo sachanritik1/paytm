@@ -1,4 +1,4 @@
-const { asyncHandler } = require("../utils/asyncHandler.js");
+const { asyncHandler } = require("../utils/AsyncHandler.js");
 const { Account } = require("../models/account.model.js");
 const { ApiResponse } = require("../utils/ApiResponse.js");
 const { model, default: mongoose } = require("mongoose");
