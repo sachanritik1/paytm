@@ -1,10 +1,10 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import Signup from "./components/Signup";
-import Signin from "./components/Signin";
 import Dashboard from "./components/Dashboard";
 import Body from "./components/Body";
 import SendMoney from "./components/SendMoney";
+import Signin from "./components/signin";
 
 const router = createBrowserRouter([
   {
